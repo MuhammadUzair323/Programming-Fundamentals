@@ -2,7 +2,7 @@
 using namespace std;
  main()
   {
-   
+   system("color 07");
    cout<< "         8888888888  888    88888           \n";
    cout<< "        88     88   88 88   88  88          \n";
    cout<< "         8888  88  88   88  88888           \n";

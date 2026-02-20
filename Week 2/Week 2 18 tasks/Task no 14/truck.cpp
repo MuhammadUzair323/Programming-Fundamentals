@@ -1,0 +1,11 @@
+#include<iostream>
+using namespace std;
+main()
+{
+ system("color 07");
+cout<<" _______________________          \n";
+cout<<"|                       |h_ __    \n";
+cout<<"|                       ||=|##L_  \n";
+cout<<"|________________.====._||_|__._] \n";
+cout<<" `(_)(_)`       `(_)(_)  = = (_)  \n";
+}
