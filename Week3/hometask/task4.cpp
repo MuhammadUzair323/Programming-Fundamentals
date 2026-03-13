@@ -2,7 +2,7 @@
 using namespace std;
 main()
 {
-    int chance, pers;
+    float chance, pers;
     float imp;
  cout<<"Please enter imposters: ";
  cin>>imp;
