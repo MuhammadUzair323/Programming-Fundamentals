@@ -3,6 +3,7 @@
     int main() {
          string books[1000];
          int count=0;
+         int totalbooks=0;
         while (true) {
         int choice;
 
@@ -15,24 +16,27 @@
 
         cout << "Enter your choice(1-5): ";
         cin >> choice;
-
+        
         if (choice == 1) {
-            int n;
+             int n;
             cout<<"Enter Number of books: ";
             cin>>n;
-        
-            for(int i=0;i<n;i++){
+            totalbooks=totalbooks+n;
+            
+            for(int i=0;i<=n;i++){
             cout << "Enter book name: " ;
-            cin>>books[count];
+            getline(cin, books[count]);
             cout<<" You added a book: "<<books[count]<<endl;
             count++;
             }
         }
         else if (choice == 2) {
-            cout << "Available Books are: "<<endl;
+            cout << "Available Books are: "<<totalbooks<<endl;
             for(int i=0;i<count;i++){
             cout<<books[i]<<endl;
             }
+            string t;
+            cin>>t;
        }
         else if (choice == 3) {
              cout << "You Borrowed a book! " << endl;
