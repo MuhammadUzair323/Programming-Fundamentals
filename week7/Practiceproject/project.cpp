@@ -25,12 +25,12 @@ int main()
         cout << "1. Admin" << endl;
         cout << "2. User " << endl;
         cout << "3. Exit " << endl;
-        int user_option;
+        string user_option;
         cout << "Choose option : ";
         cin >> user_option;
         cout << "You Chose Option : " << user_option << endl;
 
-        if (user_option == 1)
+        if (user_option == "1")
         {
             for (int i = 0; i < 3; i++)
             {
@@ -57,10 +57,10 @@ int main()
                         cout << "5. Delete Record" << endl;
                         cout << "6. Logout" << endl;
                         cout << "Choose the option: ";
-                        int admin_option;
+                        string admin_option;
                         cin >> admin_option;
 
-                        if (admin_option == 1)
+                        if (admin_option == "1")
                         {
                             cout << "Name\tAge\tMatric\tFsc\tEcat\tP1\tP2\tP3" << endl;
                             for (int i = 0; i < index_current; i++)
@@ -71,7 +71,7 @@ int main()
                                 }
                             }
                         }
-                        else if (admin_option == 2)
+                        else if (admin_option == "2")
                         {
                             cout << "Enter the name you want to search: ";
                             string name;
@@ -93,7 +93,7 @@ int main()
                                 cout << "No record Found " << name << endl;
                             }
                         }
-                        else if (admin_option == 3)
+                        else if (admin_option == "3")
                         {
                             cout << "Enter the name you want to update record of: ";
                             string name;
@@ -153,7 +153,7 @@ int main()
                                 cout << "Record not found!";
                             }
                         }
-                        else if (admin_option == 4)
+                        else if (admin_option == "4")
                         {
                             for (int i = 0; i < index_current; i++)
                             {
@@ -269,7 +269,7 @@ int main()
                             cout << "\n--- Remaining Seats ---" << endl;
                             cout << "CS: " << cs_seats << " | CE: " << ce_seats << " | EE: " << ee_seats << " | ME: " << me_seats << endl;
                         }
-                        else if (admin_option == 5)
+                        else if (admin_option == "5")
                         {
                             cout << "Enter the name you want to Delete record of: ";
                             string name;
@@ -301,7 +301,7 @@ int main()
                                 cout << "Record Not Found! " << endl;
                             }
                         }
-                        else if (admin_option == 6)
+                        else if (admin_option == "6")
                         {
                             break;
                         }
@@ -324,7 +324,7 @@ int main()
                 getch();
             }
         }
-        else if (user_option == 2)
+        else if (user_option == "2")
         {
             system("cls");
             cout << "Welcome to UMS! This is Student Menu" << endl;
@@ -367,7 +367,7 @@ int main()
             cout << "Press any key to continue...";
             getch();
         }
-        else if (user_option == 3)
+        else if (user_option == "3")
         {
             break;
         }
