@@ -3,8 +3,8 @@
 using namespace std;
 int main()
 {
-    const int Total_Students = 1000;
-    int index_current = 7;
+    int Total_Students = 1000;
+    int index_current = 8;
     string name_array[Total_Students] = {"Ali", "Ammar", "Sara", "Usman", "Zara", "Hassan", "Ayesha", "Bilal"};
     int age_array[Total_Students] = {19, 20, 18, 21, 19, 20, 18, 22};
     float matric_marks_array[Total_Students] = {1050, 1100, 980, 1030, 1070, 950, 1090, 1010};
