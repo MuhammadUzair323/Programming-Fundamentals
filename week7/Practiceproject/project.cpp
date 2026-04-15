@@ -5,7 +5,7 @@ int main()
 {
     int Total_Students = 1000;
     int index_current = 8;
-    string name_array[Total_Students] = {"Ali", "Ammar", "Sara", "Usman", "Zara", "Hassan", "Ayesha", "Bilal"};
+    string name_array[Total_Students] = {"Ali", "Ammar", "Sara", "Usman", "Zara", "Hassan", "Ayesha", "Ali"};
     int age_array[Total_Students] = {19, 20, 18, 21, 19, 20, 18, 22};
     float matric_marks_array[Total_Students] = {1050, 1100, 980, 1030, 1070, 950, 1090, 1010};
     float FSC_marks_array[Total_Students] = {982, 1020, 910, 970, 1050, 880, 1030, 940};
@@ -30,9 +30,9 @@ int main()
         cin >> user_option;
         cout << "You Chose Option : " << user_option << endl;
 
-        if (user_option == "1")
+        if (user_option == "1")//admin menu
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)//loop for limiting credentials 
             {
                 system("cls");
                 cout << "Admin Menu : (LOGIN ATTEMPT : " << i + 1 << ")" << endl;
@@ -43,7 +43,7 @@ int main()
                 string password;
                 cin >> password;
 
-                if (username == "admin" && password == "123")
+                if (username == "admin" && password == "123")//comparing if credentials are correct
                 {
                     cout << "Successfully Logged in!" << endl;
 
@@ -60,7 +60,7 @@ int main()
                         string admin_option;
                         cin >> admin_option;
 
-                        if (admin_option == "1")
+                        if (admin_option == "1")//show all students
                         {
                             cout << "Name\tAge\tMatric\tFsc\tEcat\tP1\tP2\tP3" << endl;
                             for (int i = 0; i < index_current; i++)
@@ -71,7 +71,7 @@ int main()
                                 }
                             }
                         }
-                        else if (admin_option == "2")
+                        else if (admin_option == "2")//search student
                         {
                             cout << "Enter the name you want to search: ";
                             string name;
@@ -81,17 +81,23 @@ int main()
                             for (int i = 0; i < index_current; i++)
                             {
                                 if (name_array[i] == name)
-                                {
+                                {   
                                     cout << "Name\tAge\tMatric\tFsc\tEcat\tP1\tP2\tP3" << endl;
                                     cout << name_array[i] << "\t" << age_array[i] << "\t" << matric_marks_array[i] << "\t" << FSC_marks_array[i] << "\t" << ecat_array[i] << "\t" << pref1_array[i] << "\t" << pref2_array[i] << "\t" << pref3_array[i] << endl;
                                     isFound = true;
                                     found_index = i;
+                                    break;
+                                    continue;
                                 }
                             }
                             if (isFound == false)
                             {
                                 cout << "No record Found " << name << endl;
                             }
+                            // else{
+                            //     cout << "Name\tAge\tMatric\tFsc\tEcat\tP1\tP2\tP3" << endl;
+                            //     cout << name_array[found_index] << "\t" << age_array[found_index] << "\t" << matric_marks_array[found_index] << "\t" << FSC_marks_array[found_index] << "\t" << ecat_array[found_index] << "\t" << pref1_array[found_index] << "\t" << pref2_array[found_index] << "\t" << pref3_array[found_index] << endl;
+                            // }
                         }
                         else if (admin_option == "3")
                         {
@@ -324,7 +330,7 @@ int main()
                 getch();
             }
         }
-        else if (user_option == "2")
+        else if (user_option == "2")//student menu
         {
             system("cls");
             cout << "Welcome to UMS! This is Student Menu" << endl;
@@ -367,7 +373,7 @@ int main()
             cout << "Press any key to continue...";
             getch();
         }
-        else if (user_option == "3")
+        else if (user_option == "3")//exit main menu
         {
             break;
         }
