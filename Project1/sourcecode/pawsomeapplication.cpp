@@ -551,7 +551,7 @@ int main() // main
                                     {
                                         domesticCount++;
                                     }
-                                    if (petTypes[i] == "field & sport" || petTypes[i] == "field and sport")
+                                    if (petTypes[i] == "Field & Sport" || petTypes[i] == "Field and Sport")
 
                                     {
                                         fieldsportCount++;
