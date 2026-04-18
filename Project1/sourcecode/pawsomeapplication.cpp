@@ -14,24 +14,31 @@ int main() // main
     float petHealth[max_capacity] = {92.5, 98.0, 99.0, 88.0};
     string petTraits[max_capacity] = {"Calm", "Fast Tracker", "Great Swimmer", "Playful"};
     double donatedMoney = 100;
+    double totalAdoptedMoney = 500;
+    double fixFeeForAdoption = 1000;
+    // Transaction History Data Structures
+    int history_size = 10;
+    string historyType[history_size]; // "Adoption" or "Donation"
+    double historyAmount[history_size];
+    string historyDetail[history_size]; // Pet name or Donor note
+    int historyCount = 0;               // Tracks how many transactions have occurred
 
     int petCount = 4;
 
     while (true) // While loop for main homescreen
     {
-        // MAIN MENU (homescreen)
         system("cls");
-        cout << "================================================" << endl;
-        cout << "            PAW-SOME PETS & CO.                 " << endl;
-        cout << "      Pet Management & Adoption Network         " << endl;
-        cout << "================================================" << endl;
-        cout << endl;
-        cout << "Who are you? " << endl;
-        cout << "1. Admin(Owner & Manager)" << endl;
-        cout << "2. Pet Donor" << endl;
-        cout << "3. Customer" << endl;
-        cout << "4. Logout" << endl;
-        cout << "Enter your choice: ";
+        cout << "\n====================================================" << endl;
+        cout << "               PAW-SOME PETS & CO.                  " << endl;
+        cout << "        - Pet Management & Adoption System -        " << endl;
+        cout << "====================================================" << endl;
+        cout << "\n  [ LOGIN AS ]" << endl;
+        cout << "  1. Administrative Staff" << endl;
+        cout << "  2. Pet Donor" << endl;
+        cout << "  3. Customer / Adopter" << endl;
+        cout << "  4. Exit Application" << endl;
+        cout << "\n----------------------------------------------------" << endl;
+        cout << "  [?] Select your role --> ";
         cin >> mainoptions;
 
         // MENU-Option decider using conditions
@@ -42,6 +49,11 @@ int main() // main
             for (int i = 0; i < 3; i++) // loop for limiting credentials
             {
                 system("cls");
+                string adminPass;
+                cout << "\n====================================================" << endl;
+                cout << "               ADMINISTRATIVE ACCESS                " << endl;
+                cout << "====================================================" << endl;
+                cout << "\n  [!] Security Check Required" << endl;
                 cout << "Admin Menu : (LOGIN ATTEMPT : " << i + 1 << ")" << endl;
                 cout << "Enter User name: ";
                 string username;
@@ -76,18 +88,21 @@ int main() // main
                     system("cls");
                     // admincode
                     string adminoptions;
-                    cout << "==============================================" << endl; // admin menu header
-                    cout << "                ADMIN Menu                    " << endl;
-                    cout << "==============================================" << endl;
-                    cout << "---> 1. Display All Pets" << endl;
-                    cout << "---> 2. Search Pet by Name" << endl;
-                    cout << "---> 3. Sorting Pets" << endl;
-                    cout << "---> 4. Update Pet Information" << endl;
-                    cout << "---> 5. Delete a Pet Record" << endl;
-                    cout << "---> 6. Inventory statistics" << endl;
-                    cout << "---> 7. View Donated Money for the Shelter"<<endl;
-                    cout << "---> 8. Return to Main Menu" << endl;
-                    cout << "        Enter selection: ";
+                    cout << "\n====================================================" << endl;
+                    cout << "                ADMINISTRATIVE DASHBOARD            " << endl;
+                    cout << "====================================================" << endl;
+                    cout << "  [1] Display All Pets" << endl;
+                    cout << "  [2] Search Pet by Name" << endl;
+                    cout << "  [3] Sorting Pets (Age/Health)" << endl;
+                    cout << "  [4] Update Pet Information" << endl;
+                    cout << "  [5] Delete a Pet Record" << endl;
+                    cout << "  [6] Inventory Statistics" << endl;
+                    cout << "  [7] View Donation Bank" << endl;
+                    cout << "  [8] View Adoption Revenue" << endl;
+                    cout << "  [9] View Transaction History" << endl;
+                    cout << "  [10] Return to Main Menu" << endl;
+                    cout << "----------------------------------------------------" << endl;
+                    cout << "  [?] Select an action --> ";
                     cin >> adminoptions;
 
                     if (adminoptions == "1") // displaying all pet data in vertical box order
@@ -101,7 +116,7 @@ int main() // main
                         for (int i = 0; i < petCount; i++)
                         {
 
-                            cout << "[ ID: " << i + 1 << " ]--------------------------------" << endl;
+                            cout << "[ ID: " << i + 1 << " ]----------------------------------------" << endl;
                             cout << "  Name   : " << petNames[i] << endl;
                             cout << "  Type   : " << petTypes[i] << " (" << petBreeds[i] << ")" << endl;
                             cout << "  Status : " << petAges[i] << " yrs | Health: " << petHealth[i] << "%" << endl;
@@ -569,19 +584,53 @@ int main() // main
                             }
                         }
                     }
-                    else if (adminoptions=="7")//showing donation money
+                    else if (adminoptions == "7") // showing donation money
                     {
                         system("cls");
-                        //code for showing donated money
-                        cout<<"=============================================\n";
-                        cout<<"               Donation Money                \n";
-                        cout<<"=============================================\n";
-                        cout<<"   Donation Bank Balance : "<<donatedMoney<<" PKR";
-                        cout<<"\nPress any key to go back...";
+                        // code for showing donated money
+                        cout << "=============================================\n";
+                        cout << "               Donation Money                \n";
+                        cout << "=============================================\n";
+                        cout << "   Donation Bank Balance : " << donatedMoney << " PKR";
+                        cout << "\nPress any key to go back...";
                         getch();
-
                     }
-                    else if (adminoptions == "8") // break to main menu
+                    else if (adminoptions == "8") // adoption money total
+                    {
+                        system("cls");
+                        // code for showing adoption money
+                        cout << "=============================================\n";
+                        cout << "               Adoption Fee Money                \n";
+                        cout << "=============================================\n";
+                        cout << "   Adoption Fee Bank Balance : " << totalAdoptedMoney << " PKR";
+                        cout << "\nPress any key to go back...";
+                        getch();
+                    }
+                    else if (adminoptions == "9") // View Transaction History
+                    {
+                        system("cls");
+                        cout << "================================================" << endl;
+                        cout << "           RECENT TRANSACTION HISTORY           " << endl;
+                        cout << "================================================" << endl;
+
+                        if (historyCount == 0)
+                        {
+                            cout << "\n   No transactions recorded yet." << endl;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < historyCount; i++)
+                            {
+                                cout << i + 1 << ". [" << historyType[i] << "]" << endl;
+                                cout << "    Amount : " << historyAmount[i] << " PKR" << endl;
+                                cout << "    Details: " << historyDetail[i] << endl;
+                                cout << "----------------------------------------------------" << endl;
+                            }
+                        }
+                        cout << "\nPress any key to return...";
+                        getch();
+                    }
+                    else if (adminoptions == "10") // break to main menu
                     {
                         break;
                     }
@@ -609,14 +658,15 @@ int main() // main
             {
                 system("cls");
                 int donorOptions;
-                cout << "=====================================\n";
-                cout << "           Pet Donor Menu             \n";
-                cout << "=====================================\n\n";
-                cout << "---> 1. Donate a Pet \n";
-                cout << "---> 2. Donate Money\n";
-                cout << "---> 3. View Remaining Capacity in inventory \n";
-                cout << "---> 4. Exit to Main Menu\n";
-                cout << "    Enter your choice : ";
+                cout << "\n====================================================" << endl;
+                cout << "                PET DONOR DASHBOARD                 " << endl;
+                cout << "====================================================" << endl;
+                cout << "  [1] Donate a Pet" << endl;
+                cout << "  [2] Donate Money" << endl;
+                cout << "  [3] View Inventory Capacity" << endl;
+                cout << "  [4] Return to Main Menu" << endl;
+                cout << "----------------------------------------------------" << endl;
+                cout << "  [?] Select an action --> ";
                 cin >> donorOptions;
                 if (donorOptions == 1)
                 {
@@ -675,8 +725,15 @@ int main() // main
                     cout << "\n Enter amount of money to donate(in PKR) : ";
                     cin >> tempDonatedMoney;
                     donatedMoney = donatedMoney + tempDonatedMoney;
-                    cout<<"\nSuccessfully Donated "<<tempDonatedMoney<<" PKR, For a Good Cause <3\n ======================================\n     May Allah Give You More!!   \n======================================\n";
-                    cout<<"Press any key to continue...";
+                    if (historyCount < history_size)
+                    {
+                        historyType[historyCount] = "Donation";
+                        historyAmount[historyCount] = tempDonatedMoney;
+                        historyDetail[historyCount] = "General Support";
+                        historyCount++;
+                    }
+                    cout << "\nSuccessfully Donated " << tempDonatedMoney << " PKR, For a Good Cause <3\n ======================================\n     May Allah Give You More!!   \n======================================\n";
+                    cout << "Press any key to continue...";
                     getch();
                 }
                 else if (donorOptions == 3)
@@ -712,6 +769,244 @@ int main() // main
         else if (mainoptions == "3") // filtering the customer menu using condition
         {
             // customercode
+            while (true)
+            {
+                system("cls");
+                int customerOptions;
+                cout << "\n====================================================" << endl;
+                cout << "              WELCOME TO PAW-SOME                   " << endl;
+                cout << "           Find Your New Best Friend!               " << endl;
+                cout << "====================================================" << endl;
+                cout << "  [1] View All Pets" << endl;
+                cout << "  [2] Search For a Specific Pet" << endl;
+                cout << "  [3] Adopt a Pet" << endl;
+                cout << "  [4] Donate Money for the Shelter" << endl;
+                cout << "  [5] Return to Main Menu" << endl;
+                cout << "----------------------------------------------------" << endl;
+                cout << "  [?] Select an action --> ";
+                cin >> customerOptions;
+
+                if (customerOptions == 1)
+                {
+                    system("cls");
+                    cout << "\n====================================================" << endl;
+                    cout << "                CURRENT PET INVENTORY               " << endl;
+                    cout << "====================================================" << endl;
+
+                    for (int i = 0; i < petCount; i++)
+                    {
+                        cout << "  [" << i + 1 << "] Name   : " << petNames[i] << endl;
+                        cout << "      Type   : " << petTypes[i] << endl;
+                        cout << "      Breed  : " << petBreeds[i] << endl;
+                        cout << "      Age    : " << petAges[i] << " years" << endl;
+                        cout << "      Health : " << petHealth[i] << "%" << endl;
+                        cout << "      Trait  : " << petTraits[i] << endl;
+                        cout << "----------------------------------------------------" << endl;
+                    }
+                    cout << "\n  Press any key to return to Dashboard...";
+                    getch();
+                }
+                else if (customerOptions == 2) // searching for a specific pet
+                {
+                    while (true)
+                    {
+                        system("cls");
+                        int searchmenuoption;
+                        cout << "=====================================\n";
+                        cout << "          Searching Pets             \n";
+                        cout << "=====================================\n\n";
+                        cout << "---> 1.Search\n";
+                        cout << "---> 2.Go back\n";
+                        cout << "  Enter you choice : ";
+                        cin >> searchmenuoption;
+                        if (searchmenuoption == 1)
+                        {
+                            system("cls");
+
+                            cout << "Enter the name you want to search: ";
+                            string searchName;
+                            cin.ignore();
+                            getline(cin, searchName);
+
+                            bool isFound = false;
+                            int found_index = -1;
+                            for (int i = 0; i < petCount; i++)
+                            {
+                                string currentPet = petNames[i];
+
+                                // MANUAL ASCII solution to solve the problem of searching with case sensitivness
+                                //  Converting BOTH strings to lowercase manually for comparison
+                                string searchLower = searchName;
+                                string storedLower = currentPet;
+
+                                for (int j = 0; j < searchLower.length(); j++)
+                                {
+                                    if (searchLower[j] >= 65 && searchLower[j] <= 90) // If it's Capital (A-Z)
+                                        searchLower[j] = searchLower[j] + 32;         // Making it lowercase
+                                }
+                                for (int j = 0; j < storedLower.length(); j++)
+                                {
+                                    if (storedLower[j] >= 65 && storedLower[j] <= 90) // If it's Capital (A-Z)
+                                        storedLower[j] = storedLower[j] + 32;         // Making it lowercase
+                                }
+                                if (storedLower == searchLower)
+                                {
+                                    cout << "[ ID: " << i + 1 << " ]--------------------------------" << endl;
+                                    cout << "  Name   : " << petNames[i] << endl;
+                                    cout << "  Type   : " << petTypes[i] << " (" << petBreeds[i] << ")" << endl;
+                                    cout << "  Status : " << petAges[i] << " yrs | Health: " << petHealth[i] << "%" << endl;
+                                    cout << "  Traits : " << petTraits[i] << endl;
+                                    isFound = true;
+                                    found_index = i;
+                                    cout << "\nPress any key to go back...";
+                                    getch();
+                                    break;
+                                }
+                            }
+                            if (isFound == false)
+                            {
+                                cout << "No record Found for : " << searchName << endl;
+                                cout << "Press any key to go back...";
+                                getch();
+                            }
+                        }
+                        else if (searchmenuoption == 2)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            cout << "Wrong selection!\n";
+                            cout << "Press any key to continue...";
+                            getch();
+                        }
+                    }
+                }
+                else if (customerOptions == 3) // adopting a pet
+                {
+                    system("cls");
+                    // code for adopting pet
+                    cout << "=====================================\n";
+                    cout << "           Adopting Pets             \n";
+                    cout << "=====================================\n\n";
+                    cout << "Enter the pet name you want to adopt: ";
+                    string adoptName;
+                    cin.ignore();
+                    getline(cin, adoptName);
+                    bool isFound = false;
+                    int found_index = -1;
+                    for (int i = 0; i < petCount; i++)
+                    {
+                        string currentPet = petNames[i];
+
+                        // MANUAL ASCII solution to solve the problem of searching with case sensitivness
+                        //  Converting BOTH strings to lowercase manually for comparison
+                        string searchLower = adoptName;
+                        string storedLower = currentPet;
+
+                        for (int j = 0; j < searchLower.length(); j++)
+                        {
+                            if (searchLower[j] >= 65 && searchLower[j] <= 90) // If it's Capital (A-Z)
+                                searchLower[j] = searchLower[j] + 32;         // Making it lowercase
+                        }
+                        for (int j = 0; j < storedLower.length(); j++)
+                        {
+                            if (storedLower[j] >= 65 && storedLower[j] <= 90) // If it's Capital (A-Z)
+                                storedLower[j] = storedLower[j] + 32;         // Making it lowercase
+                        }
+                        if (storedLower == searchLower)
+                        {
+                            string confirmationMsg;
+                            cout << "    FIXED Fee for Adoption : " << fixFeeForAdoption << "\n";
+                            cout << "        Record of " << adoptName << endl;
+                            cout << "[ ID: " << i + 1 << " ]\n--------------------------------" << endl;
+                            cout << "  Name   : " << petNames[i] << endl;
+                            cout << "  Type   : " << petTypes[i] << " (" << petBreeds[i] << ")" << endl;
+                            cout << "  Status : " << petAges[i] << " yrs | Health: " << petHealth[i] << "%" << endl;
+                            cout << "  Traits : " << petTraits[i] << endl;
+                            isFound = true;
+                            found_index = i;
+                            cout << "press any key to continue...";
+                            getch();
+                            system("cls");
+                            cout << "Confirm Payment Of " << fixFeeForAdoption << " for Adopting " << petNames[found_index] << " ?(yes/no) : ";
+                            getline(cin, confirmationMsg);
+                            if (confirmationMsg == "yes")
+                            {
+                                totalAdoptedMoney = totalAdoptedMoney + fixFeeForAdoption;
+                                if (historyCount < history_size)
+                                {
+                                    historyType[historyCount] = "Adoption";
+                                    historyAmount[historyCount] = fixFeeForAdoption;
+                                    historyDetail[historyCount] = "Adopted: " + adoptName;
+                                    historyCount++;
+                                }
+                                cout << "=====================================\n";
+                                cout << "           Adopting Pets             \n";
+                                cout << "=====================================\n\n";
+
+                                cout << "\n  Congratulations on Adopting " << adoptName << " It's " << petTraits[found_index] << " \n We are sure it will be Frank with you right after!!";
+                                for (int i = found_index; i < petCount - 1; i++)
+                                {
+                                    petNames[i] = petNames[i + 1];
+                                    petTypes[i] = petTypes[i + 1];
+                                    petBreeds[i] = petBreeds[i + 1];
+                                    petAges[i] = petAges[i + 1];
+                                    petHealth[i] = petHealth[i + 1];
+                                    petTraits[i] = petTraits[i + 1];
+                                }
+                                petCount--;
+
+                                break;
+                            }
+                            else
+                            {
+
+                                break;
+                            }
+                        }
+                    }
+                    if (isFound == false)
+                    {
+                        cout << "No record Found for : " << adoptName << endl;
+                    }
+                    cout << "\nPress any key to return to Main Menu...";
+                    getch();
+                    system("cls");
+                }
+                else if (customerOptions == 4)
+                {
+                    system("cls");
+                    string donateMoneyselection;
+                    cout << "=====================================\n";
+                    cout << "           Donation Menu             \n";
+                    cout << "=====================================\n\n";
+                    double tempDonatedMoney;
+                    cout << "\n Enter amount of money to donate(in PKR) : ";
+                    cin >> tempDonatedMoney;
+                    donatedMoney = donatedMoney + tempDonatedMoney;
+                    if (historyCount < history_size)
+                    {
+                        historyType[historyCount] = "Donation";
+                        historyAmount[historyCount] = tempDonatedMoney;
+                        historyDetail[historyCount] = "Customer General Support";
+                        historyCount++;
+                    }
+                    cout << "\nSuccessfully Donated " << tempDonatedMoney << " PKR, For a Good Cause <3\n ======================================\n     May Allah Give You More!!   \n======================================\n";
+                    cout << "Press any key to continue...";
+                    getch();
+                }
+                else if (customerOptions == 5)
+                {
+                    break;
+                }
+                else
+                {
+                    cout << "Wrong choice!! Please enter again\n";
+                    cout << "Press any key to continue...";
+                    getch();
+                }
+            }
         }
         // loop breaker i.e the exit option
         else if (mainoptions == "4") // filtering the exit option using condition and logging out
