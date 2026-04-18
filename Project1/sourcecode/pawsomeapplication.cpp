@@ -446,9 +446,9 @@ int main() // main
                     {
                         system("cls");
                         // code for deleting pet info
-                                cout << "=====================================\n";
-                                cout << "           Removing Pets             \n";
-                                cout << "=====================================\n\n";
+                        cout << "=====================================\n";
+                        cout << "           Removing Pets             \n";
+                        cout << "=====================================\n\n";
                         cout << "Enter the pet name you want to delete: ";
                         string deleteName;
                         cin.ignore();
