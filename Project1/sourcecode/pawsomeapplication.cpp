@@ -13,6 +13,7 @@ int main() // main
     int petAges[max_capacity] = {2, 3, 2, 1};
     float petHealth[max_capacity] = {92.5, 98.0, 99.0, 88.0};
     string petTraits[max_capacity] = {"Calm", "Fast Tracker", "Great Swimmer", "Playful"};
+    double donatedMoney = 100;
 
     int petCount = 4;
 
@@ -78,14 +79,15 @@ int main() // main
                     cout << "==============================================" << endl; // admin menu header
                     cout << "                ADMIN Menu                    " << endl;
                     cout << "==============================================" << endl;
-                    cout << "1. Display All Pets" << endl;
-                    cout << "2. Search Pet by Name" << endl;
-                    cout << "3. Sorting Pets" << endl;
-                    cout << "4. Update Pet Information" << endl;
-                    cout << "5. Delete a Pet Record" << endl;
-                    cout << "6. Inventory statistics" << endl;
-                    cout << "7. Return to Main Menu" << endl;
-                    cout << "Enter selection: ";
+                    cout << "---> 1. Display All Pets" << endl;
+                    cout << "---> 2. Search Pet by Name" << endl;
+                    cout << "---> 3. Sorting Pets" << endl;
+                    cout << "---> 4. Update Pet Information" << endl;
+                    cout << "---> 5. Delete a Pet Record" << endl;
+                    cout << "---> 6. Inventory statistics" << endl;
+                    cout << "---> 7. View Donated Money for the Shelter"<<endl;
+                    cout << "---> 8. Return to Main Menu" << endl;
+                    cout << "        Enter selection: ";
                     cin >> adminoptions;
 
                     if (adminoptions == "1") // displaying all pet data in vertical box order
@@ -98,14 +100,12 @@ int main() // main
                         cout << "\nTotal Pets: " << petCount << endl;
                         for (int i = 0; i < petCount; i++)
                         {
-                            if (petNames[i] != "")
-                            {
-                                cout << "[ ID: " << i + 1 << " ]--------------------------------" << endl;
-                                cout << "  Name   : " << petNames[i] << endl;
-                                cout << "  Type   : " << petTypes[i] << " (" << petBreeds[i] << ")" << endl;
-                                cout << "  Status : " << petAges[i] << " yrs | Health: " << petHealth[i] << "%" << endl;
-                                cout << "  Traits : " << petTraits[i] << endl;
-                            }
+
+                            cout << "[ ID: " << i + 1 << " ]--------------------------------" << endl;
+                            cout << "  Name   : " << petNames[i] << endl;
+                            cout << "  Type   : " << petTypes[i] << " (" << petBreeds[i] << ")" << endl;
+                            cout << "  Status : " << petAges[i] << " yrs | Health: " << petHealth[i] << "%" << endl;
+                            cout << "  Traits : " << petTraits[i] << endl;
                         }
                         cout << "----------------------------------------" << endl;
                         cout << "Press any key to return...";
@@ -416,6 +416,7 @@ int main() // main
                                 cout << "Enter the new pet age for updating : ";
                                 int tempPetage;
                                 cin >> tempPetage;
+                                cin.ignore();
                                 cout << "Enter the new pet health for updating : ";
                                 double tempPethealth;
                                 cin >> tempPethealth;
@@ -535,7 +536,7 @@ int main() // main
                                     {
                                         domesticCount++;
                                     }
-                                    if (petTypes[i] == "Field & Sport" || petTypes[i] == "field & sport" || petTypes[i] == "field and sport" || petTypes[i] == "Field and Sport")
+                                    if (petTypes[i] == "field & sport" || petTypes[i] == "field and sport")
 
                                     {
                                         fieldsportCount++;
@@ -568,7 +569,19 @@ int main() // main
                             }
                         }
                     }
-                    else if (adminoptions == "7") // break to main menu
+                    else if (adminoptions=="7")//showing donation money
+                    {
+                        system("cls");
+                        //code for showing donated money
+                        cout<<"=============================================\n";
+                        cout<<"               Donation Money                \n";
+                        cout<<"=============================================\n";
+                        cout<<"   Donation Bank Balance : "<<donatedMoney<<" PKR";
+                        cout<<"\nPress any key to go back...";
+                        getch();
+
+                    }
+                    else if (adminoptions == "8") // break to main menu
                     {
                         break;
                     }
@@ -592,6 +605,109 @@ int main() // main
         else if (mainoptions == "2") // filtering the donor menu using condition
         {
             // donorcode
+            while (true)
+            {
+                system("cls");
+                int donorOptions;
+                cout << "=====================================\n";
+                cout << "           Pet Donor Menu             \n";
+                cout << "=====================================\n\n";
+                cout << "---> 1. Donate a Pet \n";
+                cout << "---> 2. Donate Money\n";
+                cout << "---> 3. View Remaining Capacity in inventory \n";
+                cout << "---> 4. Exit to Main Menu\n";
+                cout << "    Enter your choice : ";
+                cin >> donorOptions;
+                if (donorOptions == 1)
+                {
+                    if (petCount < max_capacity)
+                    {
+                        cin.ignore();
+                        cout << "Enter the name of the pet you want to Donate : ";
+                        string donateName;
+                        getline(cin, donateName);
+                        cout << "Enter the Pet's type : ";
+                        string donateType;
+                        getline(cin, donateType);
+                        cout << "Enter the Pet's breed : ";
+                        string donateBreed;
+                        getline(cin, donateBreed);
+                        cout << "Enter the Pet's age : ";
+                        int donateAge;
+                        cin >> donateAge;
+                        cout << "Enter the Pet's Health(in %) : ";
+                        double donateHealth;
+                        cin >> donateHealth;
+                        cin.ignore();
+                        cout << "Enter the Pet's trait (Usual Behaviour) : ";
+                        string donateTrait;
+                        getline(cin, donateTrait);
+                        petNames[petCount] = donateName;
+                        petTypes[petCount] = donateType;
+                        petBreeds[petCount] = donateBreed;
+                        petAges[petCount] = donateAge;
+                        petHealth[petCount] = donateHealth;
+                        petTraits[petCount] = donateTrait;
+                        petCount++;
+                        cout << "\n\n Successfully Donted Pet For a Good Cause <3";
+                    }
+                    else
+                    {
+                        cout << "================================================" << endl;
+                        cout << "            NOTICE: SHELTER FULL                " << endl;
+                        cout << "================================================" << endl;
+                        cout << "We are currently at our maximum capacity of " << max_capacity << " pets." << endl;
+                        cout << "We cannot accept new donations at this time." << endl;
+                        cout << "\n[!] ALERT: A request has been sent to the Manager" << endl;
+                        cout << "    to increase storage capacity soon." << endl;
+                        cout << "\nPress any key to return...";
+                        getch();
+                    }
+                }
+                else if (donorOptions == 2)
+                {
+                    system("cls");
+                    string donateMoneyselection;
+                    cout << "=====================================\n";
+                    cout << "           Pet Donor Menu             \n";
+                    cout << "=====================================\n\n";
+                    double tempDonatedMoney;
+                    cout << "\n Enter amount of money to donate(in PKR) : ";
+                    cin >> tempDonatedMoney;
+                    donatedMoney = donatedMoney + tempDonatedMoney;
+                    cout<<"\nSuccessfully Donated "<<tempDonatedMoney<<" PKR, For a Good Cause <3\n ======================================\n     May Allah Give You More!!   \n======================================\n";
+                    cout<<"Press any key to continue...";
+                    getch();
+                }
+                else if (donorOptions == 3)
+                {
+                    int tempRemainingCapacity;
+                    if (max_capacity - petCount > 0)
+                    {
+                        tempRemainingCapacity = max_capacity - petCount;
+                    }
+                    else
+                    {
+                        tempRemainingCapacity = 0;
+                    }
+                    cout << "==============================================\n";
+                    cout << "          Remaining Shelter Capacity          \n";
+                    cout << "==============================================\n";
+                    cout << "---> Remaining Capacity : " << tempRemainingCapacity;
+                    cout << "\nPress any key to continue...";
+                    getch();
+                }
+                else if (donorOptions == 4)
+                {
+                    break;
+                }
+                else
+                {
+                    cout << "Wrong Choice !! Please enter again...";
+                    cout << "\n Press any key to continue...";
+                    getch();
+                }
+            }
         }
         else if (mainoptions == "3") // filtering the customer menu using condition
         {
