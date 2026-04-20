@@ -132,7 +132,7 @@ int main() // main
                         while (true)
                         {
                             system("cls");
-                            int searchmenuoption;
+                            string searchmenuoption;
                             cout << "=====================================\n";
                             cout << "          Searching Pets             \n";
                             cout << "=====================================\n\n";
@@ -140,7 +140,7 @@ int main() // main
                             cout << "---> 2.Go back\n";
                             cout << "  Enter you choice : ";
                             cin >> searchmenuoption;
-                            if (searchmenuoption == 1)
+                            if (searchmenuoption == "1")
                             {
                                 system("cls");
 
@@ -191,7 +191,7 @@ int main() // main
                                     getch();
                                 }
                             }
-                            else if (searchmenuoption == 2)
+                            else if (searchmenuoption == "2")
                             {
                                 break;
                             }
@@ -700,6 +700,8 @@ int main() // main
                         petTraits[petCount] = donateTrait;
                         petCount++;
                         cout << "\n\n Successfully Donted Pet For a Good Cause <3";
+                        cout << "\n\nPress any key to continue...";
+                        getch();
                     }
                     else
                     {
@@ -747,6 +749,7 @@ int main() // main
                     {
                         tempRemainingCapacity = 0;
                     }
+                    system("cls");
                     cout << "==============================================\n";
                     cout << "          Remaining Shelter Capacity          \n";
                     cout << "==============================================\n";
