@@ -100,7 +100,8 @@ int main() // main
                     cout << "  [7] View Donation Bank" << endl;
                     cout << "  [8] View Adoption Revenue" << endl;
                     cout << "  [9] View Transaction History" << endl;
-                    cout << "  [10] Return to Main Menu" << endl;
+                    cout << "  [10] Factory Reset (Delete all data)" << endl;
+                    cout << "  [11] Return to Main Menu" << endl;
                     cout << "----------------------------------------------------" << endl;
                     cout << "  [?] Select an action --> ";
                     cin >> adminoptions;
@@ -630,7 +631,62 @@ int main() // main
                         cout << "\nPress any key to return...";
                         getch();
                     }
-                    else if (adminoptions == "10") // break to main menu
+                    else if (adminoptions == "10")//factory reset or clear all data of shelter= rounding back pet count, history count, and donated and adopted money to zero
+                    {//it doesnt mean fully cleaned its just a quick reset, the values of arrays are still there...
+                        while (true)
+                        {
+                            system("cls");
+                            string confirmationMsg;
+                            string specialKey = "1A2B3C";
+                            cout << "=======================================\n";
+                            cout << "            FACTORY RESET              \n";
+                            cout << "=======================================\n\n";
+                            cout << "[1] Are you sure you want to erase all data?(yes/no) : "<<endl;
+                            cout << "[2] Go back"<<endl<<endl;
+                            cout << "---------------------------------------\n";
+                            cout << "[?] Select an action -->(yes/no for [1] or '2' for [2]) : ";
+                            cin >> confirmationMsg;
+                            if (confirmationMsg == "yes")
+                            {
+                                string tempSpecialKey;
+                                cout << "Please Enter the special key : ";//resetting requires special key access
+                                cin >> tempSpecialKey;
+                                if (tempSpecialKey == specialKey)
+                                {
+                                    petCount = 0;
+                                    historyCount=0;
+                                    donatedMoney=0;
+                                    totalAdoptedMoney=0;
+                                    cout<<"\n[SUCCESS] System has been restored to factory settings!"<<endl;
+                                    cout << "Press any key to continue...";
+                                    getch();
+                                    break;
+                                }
+                                else
+                                {
+                                    cout << "You Entered Wrong key!! ";
+                                    cout << "\nPress any key to go back...";
+                                    getch();
+                                }
+                            }
+                            else if (confirmationMsg == "no")
+                            {
+                                cout << "Press any key to go back...";
+                                getch();
+                            }
+                            else if(confirmationMsg=="2")
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                cout << "\n\nYou entered the wrong action!!\n";
+                                cout << "Press any key to continue...";
+                                getch();
+                            }
+                        }
+                    }
+                    else if (adminoptions == "11") // break to main menu
                     {
                         break;
                     }
@@ -670,7 +726,7 @@ int main() // main
                 cin >> donorOptions;
                 if (donorOptions == 1)
                 {
-                    if (petCount < max_capacity)
+                    if (petCount < max_capacity)//donating only when petcount is less than max capacity
                     {
                         cin.ignore();
                         cout << "Enter the name of the pet you want to Donate : ";
@@ -703,7 +759,7 @@ int main() // main
                         cout << "\n\nPress any key to continue...";
                         getch();
                     }
-                    else
+                    else//showing a notice for shelter full if  pet count is equal to or reached the max capacity
                     {
                         cout << "================================================" << endl;
                         cout << "            NOTICE: SHELTER FULL                " << endl;
@@ -716,7 +772,7 @@ int main() // main
                         getch();
                     }
                 }
-                else if (donorOptions == 2)
+                else if (donorOptions == 2)//donation money and keeping record of the history
                 {
                     system("cls");
                     string donateMoneyselection;
@@ -738,7 +794,7 @@ int main() // main
                     cout << "Press any key to continue...";
                     getch();
                 }
-                else if (donorOptions == 3)
+                else if (donorOptions == 3)//shows remaining capacity of shelter for pets
                 {
                     int tempRemainingCapacity;
                     if (max_capacity - petCount > 0)
@@ -772,7 +828,7 @@ int main() // main
         else if (mainoptions == "3") // filtering the customer menu using condition
         {
             // customercode
-            while (true)
+            while (true)//customer menu code
             {
                 system("cls");
                 int customerOptions;
@@ -789,7 +845,7 @@ int main() // main
                 cout << "  [?] Select an action --> ";
                 cin >> customerOptions;
 
-                if (customerOptions == 1)
+                if (customerOptions == 1)//same as showing all pets in the admin menu
                 {
                     system("cls");
                     cout << "\n====================================================" << endl;
@@ -949,7 +1005,7 @@ int main() // main
                                 cout << "=====================================\n\n";
 
                                 cout << "\n  Congratulations on Adopting " << adoptName << " It's " << petTraits[found_index] << " \n We are sure it will be Frank with you right after!!";
-                                for (int i = found_index; i < petCount - 1; i++)
+                                for (int i = found_index; i < petCount - 1; i++)///adopting also means deleting the pet from arrays
                                 {
                                     petNames[i] = petNames[i + 1];
                                     petTypes[i] = petTypes[i + 1];
@@ -977,7 +1033,7 @@ int main() // main
                     getch();
                     system("cls");
                 }
-                else if (customerOptions == 4)
+                else if (customerOptions == 4)//donation menu
                 {
                     system("cls");
                     string donateMoneyselection;
@@ -988,7 +1044,7 @@ int main() // main
                     cout << "\n Enter amount of money to donate(in PKR) : ";
                     cin >> tempDonatedMoney;
                     donatedMoney = donatedMoney + tempDonatedMoney;
-                    if (historyCount < history_size)
+                    if (historyCount < history_size)//keeping record of the history
                     {
                         historyType[historyCount] = "Donation";
                         historyAmount[historyCount] = tempDonatedMoney;
