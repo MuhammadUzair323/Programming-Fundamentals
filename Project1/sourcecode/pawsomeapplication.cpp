@@ -631,8 +631,8 @@ int main() // main
                         cout << "\nPress any key to return...";
                         getch();
                     }
-                    else if (adminoptions == "10")//factory reset or clear all data of shelter= rounding back pet count, history count, and donated and adopted money to zero
-                    {//it doesnt mean fully cleaned its just a quick reset, the values of arrays are still there...
+                    else if (adminoptions == "10") // factory reset or clear all data of shelter= rounding back pet count, history count, and donated and adopted money to zero
+                    {                              // it doesnt mean fully cleaned its just a quick reset, the values of arrays are still there...
                         while (true)
                         {
                             system("cls");
@@ -641,23 +641,24 @@ int main() // main
                             cout << "=======================================\n";
                             cout << "            FACTORY RESET              \n";
                             cout << "=======================================\n\n";
-                            cout << "[1] Are you sure you want to erase all data?(yes/no) : "<<endl;
-                            cout << "[2] Go back"<<endl<<endl;
+                            cout << "[1] Are you sure you want to erase all data?(yes/no) : " << endl;
+                            cout << "[2] Go back" << endl
+                                 << endl;
                             cout << "---------------------------------------\n";
                             cout << "[?] Select an action -->(yes/no for [1] or '2' for [2]) : ";
                             cin >> confirmationMsg;
                             if (confirmationMsg == "yes")
                             {
                                 string tempSpecialKey;
-                                cout << "Please Enter the special key : ";//resetting requires special key access
+                                cout << "Please Enter the special key : "; // resetting requires special key access
                                 cin >> tempSpecialKey;
                                 if (tempSpecialKey == specialKey)
                                 {
                                     petCount = 0;
-                                    historyCount=0;
-                                    donatedMoney=0;
-                                    totalAdoptedMoney=0;
-                                    cout<<"\n[SUCCESS] System has been restored to factory settings!"<<endl;
+                                    historyCount = 0;
+                                    donatedMoney = 0;
+                                    totalAdoptedMoney = 0;
+                                    cout << "\n[SUCCESS] System has been restored to factory settings!" << endl;
                                     cout << "Press any key to continue...";
                                     getch();
                                     break;
@@ -674,7 +675,7 @@ int main() // main
                                 cout << "Press any key to go back...";
                                 getch();
                             }
-                            else if(confirmationMsg=="2")
+                            else if (confirmationMsg == "2")
                             {
                                 break;
                             }
@@ -726,7 +727,7 @@ int main() // main
                 cin >> donorOptions;
                 if (donorOptions == 1)
                 {
-                    if (petCount < max_capacity)//donating only when petcount is less than max capacity
+                    if (petCount < max_capacity) // donating only when petcount is less than max capacity
                     {
                         cin.ignore();
                         cout << "Enter the name of the pet you want to Donate : ";
@@ -759,7 +760,7 @@ int main() // main
                         cout << "\n\nPress any key to continue...";
                         getch();
                     }
-                    else//showing a notice for shelter full if  pet count is equal to or reached the max capacity
+                    else // showing a notice for shelter full if  pet count is equal to or reached the max capacity
                     {
                         cout << "================================================" << endl;
                         cout << "            NOTICE: SHELTER FULL                " << endl;
@@ -772,7 +773,7 @@ int main() // main
                         getch();
                     }
                 }
-                else if (donorOptions == 2)//donation money and keeping record of the history
+                else if (donorOptions == 2) // donation money and keeping record of the history
                 {
                     system("cls");
                     string donateMoneyselection;
@@ -794,7 +795,7 @@ int main() // main
                     cout << "Press any key to continue...";
                     getch();
                 }
-                else if (donorOptions == 3)//shows remaining capacity of shelter for pets
+                else if (donorOptions == 3) // shows remaining capacity of shelter for pets
                 {
                     int tempRemainingCapacity;
                     if (max_capacity - petCount > 0)
@@ -828,24 +829,25 @@ int main() // main
         else if (mainoptions == "3") // filtering the customer menu using condition
         {
             // customercode
-            while (true)//customer menu code
+            while (true) // customer menu code
             {
                 system("cls");
-                int customerOptions;
+                string customerOptions;
                 cout << "\n====================================================" << endl;
                 cout << "              WELCOME TO PAW-SOME                   " << endl;
                 cout << "           Find Your New Best Friend!               " << endl;
                 cout << "====================================================" << endl;
                 cout << "  [1] View All Pets" << endl;
                 cout << "  [2] Search For a Specific Pet" << endl;
-                cout << "  [3] Adopt a Pet" << endl;
-                cout << "  [4] Donate Money for the Shelter" << endl;
-                cout << "  [5] Return to Main Menu" << endl;
+                cout << "  [3] Filter by type" << endl;
+                cout << "  [4] Adopt a Pet" << endl;
+                cout << "  [5] Donate Money for the Shelter" << endl;
+                cout << "  [6] Return to Main Menu" << endl;
                 cout << "----------------------------------------------------" << endl;
                 cout << "  [?] Select an action --> ";
                 cin >> customerOptions;
 
-                if (customerOptions == 1)//same as showing all pets in the admin menu
+                if (customerOptions == "1") // same as showing all pets in the admin menu
                 {
                     system("cls");
                     cout << "\n====================================================" << endl;
@@ -865,7 +867,7 @@ int main() // main
                     cout << "\n  Press any key to return to Dashboard...";
                     getch();
                 }
-                else if (customerOptions == 2) // searching for a specific pet
+                else if (customerOptions == "2") // searching for a specific pet
                 {
                     while (true)
                     {
@@ -941,7 +943,41 @@ int main() // main
                         }
                     }
                 }
-                else if (customerOptions == 3) // adopting a pet
+                else if (customerOptions == "3")
+                {
+                    system("cls");
+                    cout << "Enter pet type to filter (Domestic / Field & Sport): ";
+                    string filterType;
+                    cin.ignore();
+                    getline(cin, filterType);
+                    
+
+                    bool anyFound = false;
+
+                    for (int i = 0; i < petCount; i++)
+                    {
+                        if (petTypes[i] == filterType)
+                        {
+                            cout << "\n";
+                            cout << "  [" << i + 1 << "] Name   : " << petNames[i] << endl;
+                            cout << "      Type   : " << petTypes[i] << endl;
+                            cout << "      Breed  : " << petBreeds[i] << endl;
+                            cout << "      Age    : " << petAges[i] << " years" << endl;
+                            cout << "      Health : " << petHealth[i] << "%" << endl;
+                            cout << "      Trait  : " << petTraits[i] << endl;
+                            cout << "----------------------------------------------------" << endl;
+                            anyFound = true;
+                        }
+                    }
+                    
+                    if (anyFound == false)
+                    {
+                        cout << "No pets found for type: " << filterType << endl;
+                    }
+                    cout<<"\nPress any key to continue...";
+                    getch();
+                }
+                else if (customerOptions == "4") // adopting a pet
                 {
                     system("cls");
                     // code for adopting pet
@@ -1005,7 +1041,7 @@ int main() // main
                                 cout << "=====================================\n\n";
 
                                 cout << "\n  Congratulations on Adopting " << adoptName << " It's " << petTraits[found_index] << " \n We are sure it will be Frank with you right after!!";
-                                for (int i = found_index; i < petCount - 1; i++)///adopting also means deleting the pet from arrays
+                                for (int i = found_index; i < petCount - 1; i++) /// adopting also means deleting the pet from arrays
                                 {
                                     petNames[i] = petNames[i + 1];
                                     petTypes[i] = petTypes[i + 1];
@@ -1033,7 +1069,7 @@ int main() // main
                     getch();
                     system("cls");
                 }
-                else if (customerOptions == 4)//donation menu
+                else if (customerOptions == "5") // donation menu
                 {
                     system("cls");
                     string donateMoneyselection;
@@ -1044,7 +1080,7 @@ int main() // main
                     cout << "\n Enter amount of money to donate(in PKR) : ";
                     cin >> tempDonatedMoney;
                     donatedMoney = donatedMoney + tempDonatedMoney;
-                    if (historyCount < history_size)//keeping record of the history
+                    if (historyCount < history_size) // keeping record of the history
                     {
                         historyType[historyCount] = "Donation";
                         historyAmount[historyCount] = tempDonatedMoney;
@@ -1055,7 +1091,7 @@ int main() // main
                     cout << "Press any key to continue...";
                     getch();
                 }
-                else if (customerOptions == 5)
+                else if (customerOptions == "6")
                 {
                     break;
                 }
