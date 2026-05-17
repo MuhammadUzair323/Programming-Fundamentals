@@ -28,6 +28,11 @@ int    historyCount = 0;
 
 int petCount = 4;
 
+// Important Credentials 
+string adminUsername = "admin";
+string adminPassword = "123";
+string eraseSpecialKey = "1A2B3C";
+
 
 // ============================================================
 //              HELPER: Convert string to lowercase
@@ -229,6 +234,35 @@ void loadHistoryFromFile()
     }
     hisFile.close();
 }
+// ============================================================
+//              FILE HANDLING: Saving Credentials
+// ============================================================
+void savingCredentials()
+{
+    ofstream credFile("Credentials.txt");
+    if(!credFile)
+    return; // file doesn't exist yet, start fresh
+    credFile<<adminUsername<<"\n";
+    credFile<<adminPassword<<"\n";
+    credFile<<eraseSpecialKey<<"\n";
+    credFile.close();
+
+}
+// ============================================================
+//              FILE HANDLING: Loading Credentials
+// ============================================================
+void loadingCredentials()
+{
+    ifstream credFile("Credentials.txt");
+    if(!credFile)
+    return; // file doesn't exist yet, start fresh
+    getline(credFile, adminUsername);
+    getline(credFile, adminPassword);
+    getline(credFile, eraseSpecialKey);
+    
+
+}
+
 
 
 // ============================================================
@@ -239,6 +273,7 @@ void saveAllData()
     savePetsToFile();
     saveFinanceToFile();
     saveHistoryToFile();
+    savingCredentials();
 }
 
 
@@ -250,6 +285,7 @@ void loadAllData()
     loadPetsFromFile();
     loadFinanceFromFile();
     loadHistoryFromFile();
+    loadingCredentials();
 }
 
 
@@ -671,7 +707,6 @@ void adminFactoryReset()
     {
         system("cls");
         string confirmationMsg;
-        string specialKey = "1A2B3C";
         cout << "=======================================\n";
         cout << "            FACTORY RESET              \n";
         cout << "=======================================\n\n";
@@ -686,7 +721,7 @@ void adminFactoryReset()
             string tempSpecialKey;
             cout << "Please Enter the special key : "; // special key needed to confirm reset
             cin >> tempSpecialKey;
-            if (tempSpecialKey == specialKey)
+            if (tempSpecialKey == eraseSpecialKey)
             {
                 // Reset all counters and balances to zero
                 petCount         = 0;
@@ -746,7 +781,7 @@ bool adminLogin()
         cout << "Enter Password: ";
         cin >> password;
 
-        if (username == "admin" && password == "123") // check credentials
+        if (username == adminUsername && password == adminPassword) // check credentials
         {
             cout << "Successfully Logged in!" << endl;
             system("cls");

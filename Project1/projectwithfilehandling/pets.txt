@@ -2,12 +2,12 @@
 Whiskers
 Domestic
 Persian
-3
-87
-Lovely
-Luna
-Domestic
-Persian
-5
-90
-Playful
+2
+78
+Happy
+Ruler
+Field & Sport
+Pointer
+4
+94
+Active
