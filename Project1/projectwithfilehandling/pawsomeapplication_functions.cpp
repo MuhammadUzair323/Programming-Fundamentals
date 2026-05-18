@@ -2,10 +2,8 @@
 #include <fstream>
 #include <conio.h>
 using namespace std;
-//Whole Management system with implemented Functions
-// ============================================================
-//                     GLOBAL DATA ARRAYS
-// ============================================================
+
+//GLOBAL DATA ARRAYS
 const int max_capacity = 1000;
 
 string petNames[max_capacity]  = {"Whiskers", "Tracker", "Duke", "Luna"};
@@ -34,24 +32,20 @@ string adminPassword = "123";
 string eraseSpecialKey = "1A2B3C";
 
 
-// ============================================================
-//              HELPER: Convert string to lowercase
-// ============================================================
-// Manual ASCII lowercase conversion (used for case-insensitive search)
+// Convert string to lowercase
+// Manual ASCII lowercase conversion (using this method for case-insensitive search)
 string toLower(string str)
 {
     for (int j = 0; j < str.length(); j++)
     {
-        if (str[j] >= 65 && str[j] <= 90) // If Capital (A-Z)
-            str[j] = str[j] + 32;          // Make lowercase
+        if (str[j] >= 65 && str[j] <= 90) // if capital
+            str[j] = str[j] + 32;          // making it lowercase by adding 32
     }
     return str;
 }
 
 
-// ============================================================
-//              HELPER: Display a single pet record
-// ============================================================
+// Display a single pet record
 void displayPetRecord(int i)
 {
     cout << "[ ID: " << i + 1 << " ]--------------------------------" << endl;
@@ -62,9 +56,7 @@ void displayPetRecord(int i)
 }
 
 
-// ============================================================
-//              HELPER: Swap two pets in all arrays
-// ============================================================
+// Swap two pets in all arrays
 // Swaps all parallel array data at positions j and j+1
 void swapPets(int j)
 {
@@ -77,10 +69,8 @@ void swapPets(int j)
 }
 
 
-// ============================================================
-//              HELPER: Remove pet at a given index
-// ============================================================
-// Shifts all entries left to fill the gap, then decrements petCount
+// Remove pet at a given index
+// Shifts all entries left to fill the gap then decrements petCount. Proper Deletion
 void removePetAt(int found_index)
 {
     for (int i = found_index; i < petCount - 1; i++)
@@ -96,9 +86,7 @@ void removePetAt(int found_index)
 }
 
 
-// ============================================================
-//              HELPER: Add transaction to history
-// ============================================================
+// Add transaction to history
 void addHistory(string type, double amount, string detail)
 {
     if (historyCount < history_size)
@@ -111,17 +99,10 @@ void addHistory(string type, double amount, string detail)
 }
 
 
-// ============================================================
-//              FILE HANDLING: Save all pet data to file
-// ============================================================
+// Save all pet data to file
 void savePetsToFile()
 {
     ofstream petFile("pets.txt");
-    if (!petFile)
-    {
-        cout << "[ERROR] Could not open pets.txt for saving!" << endl;
-        return;
-    }
     petFile << petCount << "\n";
     for (int i = 0; i < petCount; i++)
     {
@@ -136,14 +117,10 @@ void savePetsToFile()
 }
 
 
-// ============================================================
-//              FILE HANDLING: Load all pet data from file
-// ============================================================
+// Load all pet data from file
 void loadPetsFromFile()
 {
     ifstream petFile("pets.txt");
-    if (!petFile)
-        return; // file doesn't exist yet, use defaults
     petFile >> petCount;
     petFile.ignore();
     for (int i = 0; i < petCount; i++)
@@ -160,17 +137,10 @@ void loadPetsFromFile()
 }
 
 
-// ============================================================
-//              FILE HANDLING: Save financial data to file
-// ============================================================
+// Save financial data to file
 void saveFinanceToFile()
 {
     ofstream finFile("finance.txt");
-    if (!finFile)
-    {
-        cout << "[ERROR] Could not open finance.txt for saving!" << endl;
-        return;
-    }
     finFile << donatedMoney      << "\n";
     finFile << totalAdoptedMoney << "\n";
     finFile << fixFeeForAdoption << "\n";
@@ -178,14 +148,10 @@ void saveFinanceToFile()
 }
 
 
-// ============================================================
-//              FILE HANDLING: Load financial data from file
-// ============================================================
+// Load financial data from file
 void loadFinanceFromFile()
 {
     ifstream finFile("finance.txt");
-    if (!finFile)
-        return; // file doesn't exist yet, use defaults
     finFile >> donatedMoney;
     finFile >> totalAdoptedMoney;
     finFile >> fixFeeForAdoption;
@@ -193,17 +159,10 @@ void loadFinanceFromFile()
 }
 
 
-// ============================================================
-//              FILE HANDLING: Save transaction history to file
-// ============================================================
+// Save transaction history to file
 void saveHistoryToFile()
 {
     ofstream hisFile("history.txt");
-    if (!hisFile)
-    {
-        cout << "[ERROR] Could not open history.txt for saving!" << endl;
-        return;
-    }
     hisFile << historyCount << "\n";
     for (int i = 0; i < historyCount; i++)
     {
@@ -215,14 +174,10 @@ void saveHistoryToFile()
 }
 
 
-// ============================================================
-//              FILE HANDLING: Load transaction history from file
-// ============================================================
+// Load transaction history from file
 void loadHistoryFromFile()
 {
     ifstream hisFile("history.txt");
-    if (!hisFile)
-        return; // file doesn't exist yet, start fresh
     hisFile >> historyCount;
     hisFile.ignore();
     for (int i = 0; i < historyCount; i++)
@@ -234,28 +189,20 @@ void loadHistoryFromFile()
     }
     hisFile.close();
 }
-// ============================================================
-//              FILE HANDLING: Saving Credentials
-// ============================================================
+// Saving Credentials
 void savingCredentials()
 {
     ofstream credFile("Credentials.txt");
-    if(!credFile)
-    return; // file doesn't exist yet, start fresh
     credFile<<adminUsername<<"\n";
     credFile<<adminPassword<<"\n";
     credFile<<eraseSpecialKey<<"\n";
     credFile.close();
 
 }
-// ============================================================
-//              FILE HANDLING: Loading Credentials
-// ============================================================
+// Loading Credentials
 void loadingCredentials()
 {
     ifstream credFile("Credentials.txt");
-    if(!credFile)
-    return; // file doesn't exist yet, start fresh
     getline(credFile, adminUsername);
     getline(credFile, adminPassword);
     getline(credFile, eraseSpecialKey);
@@ -265,9 +212,7 @@ void loadingCredentials()
 
 
 
-// ============================================================
-//              FILE HANDLING: Save all data (wrapper)
-// ============================================================
+// Saving all data
 void saveAllData()
 {
     savePetsToFile();
@@ -277,9 +222,7 @@ void saveAllData()
 }
 
 
-// ============================================================
-//              FILE HANDLING: Load all data (wrapper)
-// ============================================================
+// Loading all data
 void loadAllData()
 {
     loadPetsFromFile();
@@ -289,9 +232,7 @@ void loadAllData()
 }
 
 
-// ============================================================
-//                   ADMIN: Display all pets
-// ============================================================
+// Admin menu: Display all pets
 void adminDisplayAllPets()
 {
     system("cls");
@@ -315,9 +256,7 @@ void adminDisplayAllPets()
 }
 
 
-// ============================================================
-//                   ADMIN: Search pet by name
-// ============================================================
+// Admin menu: Search pet by name
 void adminSearchPet()
 {
     while (true)
@@ -343,7 +282,7 @@ void adminSearchPet()
             bool isFound = false;
             for (int i = 0; i < petCount; i++)
             {
-                if (toLower(petNames[i]) == toLower(searchName))
+                if (toLower(petNames[i]) == toLower(searchName))//using tolower function i made to search with case insenstiveness
                 {
                     displayPetRecord(i);
                     isFound = true;
@@ -373,9 +312,7 @@ void adminSearchPet()
 }
 
 
-// ============================================================
-//         ADMIN: Sort pets by health (bubble sort, highest first)
-// ============================================================
+// Admin menu: Sort pets by health (bubble sort, highest first)
 void sortByHealth()
 {
     for (int i = 0; i < petCount - 1; i++)
@@ -389,14 +326,12 @@ void sortByHealth()
 }
 
 
-// ============================================================
-//         ADMIN: Sort pets by age (bubble sort, oldest or youngest first)
-// ============================================================
+// Admin menu: Sort pets by age (bubble sort, oldest or youngest first)
 void sortByAge()
 {
     int sortageOptions;
     system("cls");
-    // Menu for age direction
+    // Menu for age sort methods
     cout << "---> 1. Oldest to Youngest\n";
     cout << "---> 2. Youngest to Oldest\n";
     cout << "       Enter your selection : ";
@@ -425,9 +360,7 @@ void sortByAge()
 }
 
 
-// ============================================================
-//              ADMIN: Sorting menu (health or age)
-// ============================================================
+// Admin menu: Sorting menu (health or age)
 void adminSortMenu()
 {
     while (true)
@@ -465,9 +398,7 @@ void adminSortMenu()
 }
 
 
-// ============================================================
-//              ADMIN: Update pet information
-// ============================================================
+// Admin menu: Update pet information
 void adminUpdatePet()
 {
     system("cls");
@@ -484,7 +415,7 @@ void adminUpdatePet()
     {
         if (toLower(petNames[i]) == toLower(updateName))
         {
-            // Show old record first
+            // showing old record first
             cout << "OLD Record of " << updateName;
             displayPetRecord(i);
             isFound = true;
@@ -492,7 +423,7 @@ void adminUpdatePet()
             getch();
             system("cls");
 
-            // Get new data from user
+            // getting new data from user and replacing it with new 
             cout << "=====================================\n";
             cout << "           Updating Pets             \n";
             cout << "=====================================\n\n";
@@ -517,7 +448,7 @@ void adminUpdatePet()
             string tempPettrait;
             getline(cin, tempPettrait);
 
-            // Store updated data back to arrays
+            // storing updated data back to arrays
             petNames[i]  = tempPetname;
             petTypes[i]  = tempPettype;
             petBreeds[i] = tempPetbreeds;
@@ -539,9 +470,7 @@ void adminUpdatePet()
 }
 
 
-// ============================================================
-//              ADMIN: Delete a pet record
-// ============================================================
+// Admin menu: Delete a pet record
 void adminDeletePet()
 {
     system("cls");
@@ -568,7 +497,7 @@ void adminDeletePet()
             getch();
             system("cls");
 
-            // Remove pet from arrays
+            // remove pet from arrays proper deletion meaning shifting the elements from right side 
             removePetAt(found_index);
 
             saveAllData();
@@ -588,9 +517,7 @@ void adminDeletePet()
 }
 
 
-// ============================================================
-//              ADMIN: Inventory statistics
-// ============================================================
+// Admin menu: inventory statistics
 void adminInventoryStats()
 {
     system("cls");
@@ -606,7 +533,7 @@ void adminInventoryStats()
             int domesticCount = 0, fieldsportCount = 0;
             int oldidx = 0, youngidx = 0;
 
-            // Count domestic and field & sport pets
+            //count domestic and field & sport pets
             for (int i = 0; i < petCount; i++)
             {
                 if (petTypes[i] == "Domestic" || petTypes[i] == "domestic")
@@ -615,14 +542,14 @@ void adminInventoryStats()
                     fieldsportCount++;
             }
 
-            // Find oldest and youngest pets
+            //find oldest and youngest pets
             for (int i = 0; i < petCount; i++)
             {
                 if (petAges[i] > petAges[oldidx])   oldidx   = i;
                 if (petAges[i] < petAges[youngidx]) youngidx = i;
             }
 
-            // Display statistics
+            //display statistics
             cout << "=======================================\n";
             cout << "          Inventory Statistics         \n";
             cout << "=======================================\n\n";
@@ -639,9 +566,7 @@ void adminInventoryStats()
 }
 
 
-// ============================================================
-//              ADMIN: View donation bank balance
-// ============================================================
+// Admin menu: view donation bank balance
 void adminViewDonations()
 {
     system("cls");
@@ -654,9 +579,7 @@ void adminViewDonations()
 }
 
 
-// ============================================================
-//              ADMIN: View adoption revenue
-// ============================================================
+// Admin menu: view adoption revenue
 void adminViewAdoptionRevenue()
 {
     system("cls");
@@ -669,9 +592,7 @@ void adminViewAdoptionRevenue()
 }
 
 
-// ============================================================
-//              ADMIN: View transaction history
-// ============================================================
+// Admin menu: view transaction history
 void adminViewTransactionHistory()
 {
     system("cls");
@@ -697,10 +618,7 @@ void adminViewTransactionHistory()
     getch();
 }
 
-
-// ============================================================
-//              ADMIN: Factory reset (clear all data)
-// ============================================================
+// Admin menu: factory reset (clear all data)
 void adminFactoryReset()
 {
     while (true)
@@ -723,7 +641,7 @@ void adminFactoryReset()
             cin >> tempSpecialKey;
             if (tempSpecialKey == eraseSpecialKey)
             {
-                // Reset all counters and balances to zero
+                // Reset all counts and balances to zero
                 petCount         = 0;
                 historyCount     = 0;
                 donatedMoney     = 0;
@@ -760,10 +678,8 @@ void adminFactoryReset()
 }
 
 
-// ============================================================
-//              ADMIN: Login logic (3 attempts)
-// ============================================================
-// Returns true if login was successful, false otherwise
+// Admin: login logic (3 attempts)
+// Returns true if login was successful,else false
 bool adminLogin()
 {
     for (int i = 0; i < 3; i++)
@@ -781,7 +697,7 @@ bool adminLogin()
         cout << "Enter Password: ";
         cin >> password;
 
-        if (username == adminUsername && password == adminPassword) // check credentials
+        if (username == adminUsername && password == adminPassword) // compare credentials
         {
             cout << "Successfully Logged in!" << endl;
             system("cls");
@@ -801,9 +717,7 @@ bool adminLogin()
 }
 
 
-// ============================================================
-//              ADMIN: Full admin dashboard menu
-// ============================================================
+// Admin menu: full admin dashboard menu
 void adminMenu()
 {
     bool loginSuccess = adminLogin();
@@ -851,7 +765,7 @@ void adminMenu()
             }
         }
     }
-    else // login failed after 3 attempts
+    else //login failed after 3 attempts
     {
         system("cls");
         cout << "Maximum login attempts reached. Access Denied!" << endl;
@@ -861,12 +775,10 @@ void adminMenu()
 }
 
 
-// ============================================================
-//              DONOR: Donate a pet to the shelter
-// ============================================================
+// Donor menu: donate a pet to the shelter
 void donorDonatePet()
 {
-    if (petCount < max_capacity) // only accept if shelter is not full
+    if (petCount < max_capacity) //only accept if shelter has some capacity
     {
         cin.ignore();
         cout << "Enter the name of the pet you want to Donate : ";
@@ -889,7 +801,7 @@ void donorDonatePet()
         string donateTrait;
         getline(cin, donateTrait);
 
-        // Add new pet to arrays
+        // add new pet to arrays
         petNames[petCount]  = donateName;
         petTypes[petCount]  = donateType;
         petBreeds[petCount] = donateBreed;
@@ -903,7 +815,7 @@ void donorDonatePet()
         cout << "\n\nPress any key to continue...";
         getch();
     }
-    else // shelter full notice
+    else //shelter full notice
     {
         cout << "================================================" << endl;
         cout << "            NOTICE: SHELTER FULL                " << endl;
@@ -918,9 +830,7 @@ void donorDonatePet()
 }
 
 
-// ============================================================
-//              DONOR: Donate money to the shelter
-// ============================================================
+// Donor menu: donate money to the shelter
 void donorDonateMoney()
 {
     system("cls");
@@ -932,7 +842,7 @@ void donorDonateMoney()
     cin >> tempDonatedMoney;
 
     donatedMoney = donatedMoney + tempDonatedMoney;
-    addHistory("Donation", tempDonatedMoney, "General Support"); // record in history
+    addHistory("Donation", tempDonatedMoney, "General Support"); //record in history
 
     saveAllData();
     cout << "\nSuccessfully Donated " << tempDonatedMoney << " PKR, For a Good Cause <3\n ======================================\n     May Allah Give You More!!   \n======================================\n";
@@ -941,9 +851,7 @@ void donorDonateMoney()
 }
 
 
-// ============================================================
-//              DONOR: View remaining shelter capacity
-// ============================================================
+// Donor menu: view remaining shelter capacity
 void donorViewCapacity()
 {
     int tempRemainingCapacity;
@@ -962,9 +870,7 @@ void donorViewCapacity()
 }
 
 
-// ============================================================
-//              DONOR: Full donor dashboard menu
-// ============================================================
+// Donor: full donor dashboard menu
 void donorMenu()
 {
     while (true)
@@ -996,9 +902,7 @@ void donorMenu()
 }
 
 
-// ============================================================
-//              CUSTOMER: View all pets
-// ============================================================
+// Customer: View all pets
 void customerViewAllPets()
 {
     system("cls");
@@ -1020,10 +924,7 @@ void customerViewAllPets()
     getch();
 }
 
-
-// ============================================================
-//              CUSTOMER: Search for a specific pet
-// ============================================================
+// customer: search for a specific pet
 void customerSearchPet()
 {
     while (true)
@@ -1078,10 +979,7 @@ void customerSearchPet()
     }
 }
 
-
-// ============================================================
-//              CUSTOMER: Filter pets by type
-// ============================================================
+// customer menu: filter pets by type
 void customerFilterByType()
 {
     system("cls");
@@ -1113,10 +1011,7 @@ void customerFilterByType()
     getch();
 }
 
-
-// ============================================================
-//              CUSTOMER: Adopt a pet
-// ============================================================
+// customer: adopt a pet
 void customerAdoptPet()
 {
     system("cls");
@@ -1144,7 +1039,7 @@ void customerAdoptPet()
             getch();
             system("cls");
 
-            // Confirm payment
+            //confirm payment
             string confirmationMsg;
             cout << "Confirm Payment Of " << fixFeeForAdoption << " for Adopting " << petNames[found_index] << " ?(yes/no) : ";
             getline(cin, confirmationMsg);
@@ -1152,14 +1047,14 @@ void customerAdoptPet()
             if (confirmationMsg == "yes")
             {
                 totalAdoptedMoney = totalAdoptedMoney + fixFeeForAdoption;
-                addHistory("Adoption", fixFeeForAdoption, "Adopted: " + adoptName); // record in history
+                addHistory("Adoption", fixFeeForAdoption, "Adopted: " + adoptName); //record in history
 
                 cout << "=====================================\n";
                 cout << "           Adopting Pets             \n";
                 cout << "=====================================\n\n";
                 cout << "\n  Congratulations on Adopting " << adoptName << " It's " << petTraits[found_index] << " \n We are sure it will be Frank with you right after!!";
 
-                removePetAt(found_index); // adopting = removing from shelter
+                removePetAt(found_index); //adopting means removing or deleting from shelter
                 saveAllData();
                 break;
             }
@@ -1177,10 +1072,7 @@ void customerAdoptPet()
     system("cls");
 }
 
-
-// ============================================================
-//              CUSTOMER: Donate money from customer side
-// ============================================================
+// customer: donate money from customer side
 void customerDonateMoney()
 {
     system("cls");
@@ -1192,7 +1084,7 @@ void customerDonateMoney()
     cin >> tempDonatedMoney;
 
     donatedMoney = donatedMoney + tempDonatedMoney;
-    addHistory("Donation", tempDonatedMoney, "Customer General Support"); // record in history
+    addHistory("Donation", tempDonatedMoney, "Customer General Support"); //record in history
 
     saveAllData();
     cout << "\nSuccessfully Donated " << tempDonatedMoney << " PKR, For a Good Cause <3\n ======================================\n     May Allah Give You More!!   \n======================================\n";
@@ -1200,10 +1092,7 @@ void customerDonateMoney()
     getch();
 }
 
-
-// ============================================================
-//              CUSTOMER: Full customer dashboard menu
-// ============================================================
+// customer: full customer dashboard menu
 void customerMenu()
 {
     while (true)
@@ -1239,10 +1128,7 @@ void customerMenu()
     }
 }
 
-
-// ============================================================
-//              MAIN: Home screen / role selection
-// ============================================================
+// main menu:Home screen
 void showHomeScreen()
 {
     cout << "\n====================================================" << endl;
@@ -1258,24 +1144,21 @@ void showHomeScreen()
     cout << "  [?] Select your role --> ";
 }
 
-
-// ============================================================
-//                          MAIN
-// ============================================================
+//main function meaning driver code starts here
 int main()
 {
     string mainoptions;
 
-    loadAllData(); // load saved data from files on startup
+    loadAllData(); //loading saved data from files on launch of program
 
-    while (true) // main homescreen loop
+    while (true) //main homescreen loop
     {
         system("cls");
         showHomeScreen();
         cin >> mainoptions;
 
-        if      (mainoptions == "1") adminMenu();    // go to admin section
-        else if (mainoptions == "2") donorMenu();    // go to donor section
+        if      (mainoptions == "1") adminMenu();    // goto admin section
+        else if (mainoptions == "2") donorMenu();    // goto donor section
         else if (mainoptions == "3") customerMenu(); // go to customer section
         else if (mainoptions == "4") break;          // exit application
         else
